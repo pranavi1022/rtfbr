@@ -2,19 +2,10 @@
  * src/lib/api.ts
  *
  * Centralized API configuration.
- *
- * Reads VITE_API_BASE (preferred) or VITE_API_URL from .env.
- * Falls back to "" (same-origin) if neither is set.
+ * Points to the deployed backend on Render.
  */
 
-export const API_BASE: string =
-  import.meta.env.VITE_API_BASE ||
-  import.meta.env.VITE_API_URL  ||
-  "";
-
-if (!API_BASE) {
-  console.warn("API_BASE is not configured. API requests will be made to the same origin.");
-}
+export const API_BASE = "https://rtfbr.onrender.com";
 
 /**
  * Shorthand for fetch with JSON + credentials.
