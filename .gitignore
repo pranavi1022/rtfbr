@@ -1,0 +1,28 @@
+# ── Python ────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+venv/
+.env
+
+# ── Node / Frontend ──────────────────────────
+node_modules/
+dist/
+dist-ssr/
+*.local
+bun.lockb
+
+# ── IDE / OS ─────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+
+# ── Archives ─────────────────────────────────
+*.zip

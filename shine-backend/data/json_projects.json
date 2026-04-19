@@ -1,0 +1,1034 @@
+{
+  "_meta": {
+    "description": "SHINE Access Point — JSON project fallback database",
+    "version": "2.0",
+    "total_entries": "120 projects across 10 categories × 3 difficulty levels",
+    "usage": "Loaded by project_engine.py when MySQL returns < 3 results"
+  },
+
+  "attendance_system": {
+    "Beginner": [
+      {
+        "title": "Student Register App",
+        "description": "A web form that lets a teacher register student names and mark daily attendance. Stores data in MySQL and shows a simple attendance table.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Class Attendance Logger",
+        "description": "Log attendance per class period. Supports multiple subjects and generates per-student percentage. Export report to CSV.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Attendance Report Viewer",
+        "description": "Reads attendance records and displays colourful monthly reports. Teacher can filter by student or date range.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Attendance Portal with Login",
+        "description": "Teacher and student login, per-class attendance marking, defaulter list generation, and PDF report export.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Smart Attendance Dashboard",
+        "description": "Role-based system (admin, teacher, student) with real-time attendance charts and CSV/PDF export.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Chart.js", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Geo-Fenced Attendance System",
+        "description": "Students mark attendance only within campus GPS boundary. Live map view for admin and analytics dashboard.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "Leaflet.js"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Face Recognition Attendance",
+        "description": "Automated attendance using OpenCV face detection. Stores face embeddings in DB, real-time marking, and admin analytics.",
+        "technologies": ["Python", "OpenCV", "Flask", "MySQL", "NumPy", "JavaScript"]
+      },
+      {
+        "title": "Blockchain Attendance Ledger",
+        "description": "Tamper-proof attendance records stored on a private blockchain. Smart contracts enforce rules; admin can audit full history.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "Blockchain"]
+      },
+      {
+        "title": "AI-Powered Attendance Predictor",
+        "description": "Predicts students likely to fall below attendance threshold using ML. Sends automated alerts and generates trend reports.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "Pandas", "JavaScript", "React"]
+      }
+    ]
+  },
+
+  "library_system": {
+    "Beginner": [
+      {
+        "title": "Book Catalogue Browser",
+        "description": "A searchable list of library books with title, author, and availability status stored in MySQL.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Library Issue Tracker",
+        "description": "Track which books are issued to which student. Admin records issue and return dates and views overdue books.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Simple Book Search App",
+        "description": "Search books by title or author. Results show cover image, genre, and shelf location. Admin adds books via form.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Library Member Portal",
+        "description": "Member registration, book catalogue with filters, issue history per member, and automatic fine calculation.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Library Management with Notifications",
+        "description": "Full library system with due-date email reminders, reservation queue, and admin dashboard with inventory reports.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "E-Library with PDF Viewer",
+        "description": "Digital library where users read PDFs in-browser. Tracks reading progress, supports bookmarks, and admin upload panel.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Smart Library Recommendation Engine",
+        "description": "Recommends books based on borrowing history using collaborative filtering. Analytics dashboard for admin.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "JavaScript", "React"]
+      },
+      {
+        "title": "RFID-Based Library System",
+        "description": "Books tagged with RFID auto-check-in/check-out at gates. Dashboard tracks real-time inventory and usage analytics.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "RFID"]
+      },
+      {
+        "title": "Library API with Mobile App",
+        "description": "RESTful library backend with JWT auth. Mobile app lets students search, reserve, and renew books.",
+        "technologies": ["Python", "Flask", "MySQL", "React Native", "REST API", "JWT"]
+      }
+    ]
+  },
+
+  "hospital_system": {
+    "Beginner": [
+      {
+        "title": "Patient Registration Form",
+        "description": "A form to register new patients with name, age, and ailment. Records stored in MySQL, admin can view patient list.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Doctor Schedule Viewer",
+        "description": "Displays available doctor slots for the week. Patients can view schedules; admin manages availability.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Basic Medical Records App",
+        "description": "Store and view patient visit records — diagnosis, prescribed medicines, and doctor notes. Simple CRUD interface.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Clinic Appointment Manager",
+        "description": "Online appointment booking with doctor selection, date/time slot picker, and confirmation email.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Hospital Patient Portal",
+        "description": "Patients log in to view medical history, book appointments, and download prescriptions. Doctors update records.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Pharmacy Inventory System",
+        "description": "Track medicine stock, suppliers, expiry dates, and auto-reorder alerts. Integrates with prescription module.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Telemedicine Platform",
+        "description": "Video consultation platform with patient-doctor chat, prescription upload, appointment scheduling, and payment gateway.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "WebRTC"]
+      },
+      {
+        "title": "Hospital AI Diagnostic Assistant",
+        "description": "Symptom-checker powered by ML that suggests probable diagnoses. Feeds into doctor review workflow with confidence scores.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "React", "REST API"]
+      },
+      {
+        "title": "Hospital ERP System",
+        "description": "End-to-end hospital ERP: patient management, billing, payroll, inventory, lab results, and analytics.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Docker"]
+      }
+    ]
+  },
+
+  "ecommerce": {
+    "Beginner": [
+      {
+        "title": "Simple Product Store",
+        "description": "Display products from MySQL with image, price, and category. Users can browse; admin manages catalogue.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Category Filter Shop",
+        "description": "Product listing with category-based filter and price sort. Products managed by admin via a hidden dashboard.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      },
+      {
+        "title": "Product Search Engine",
+        "description": "Live search bar that filters products as user types. Search across title, description, and category stored in MySQL.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Shopping Cart App",
+        "description": "Add/remove items to cart, calculate totals, and place orders. Order history saved in MySQL. User authentication required.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "E-Commerce with Reviews",
+        "description": "Full shopping site with product ratings, user reviews, wishlist, and admin panel to manage products and orders.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Multi-Vendor Marketplace",
+        "description": "Multiple sellers register shops; buyers browse and order from any seller. Admin approves sellers and mediates disputes.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "E-Commerce with Payment Gateway",
+        "description": "Complete store with Razorpay/Stripe integration, order tracking emails, inventory control, and React frontend.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Razorpay"]
+      },
+      {
+        "title": "E-Commerce Recommendation Engine",
+        "description": "Product recommendations using collaborative filtering on purchase history. Includes A/B testing framework.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "JavaScript", "React"]
+      },
+      {
+        "title": "Headless Commerce API",
+        "description": "REST API-first commerce backend with JWT auth, GraphQL queries, Redis caching, and a React storefront.",
+        "technologies": ["Python", "Flask", "MySQL", "Redis", "JavaScript", "React", "Docker"]
+      }
+    ]
+  },
+
+  "ai_project": {
+    "Beginner": [
+      {
+        "title": "Sentiment Analyser",
+        "description": "Enter text and get a positive/negative/neutral sentiment result using a pre-trained model. Simple Flask+HTML interface.",
+        "technologies": ["Python", "Flask", "NLTK", "HTML", "CSS"]
+      },
+      {
+        "title": "Image Classifier Demo",
+        "description": "Upload an image and classify it into categories using a pre-trained CNN. Shows top-3 predictions with confidence.",
+        "technologies": ["Python", "Flask", "TensorFlow", "HTML", "CSS"]
+      },
+      {
+        "title": "Simple Rule-Based Chatbot",
+        "description": "Rule-based chatbot that answers predefined FAQs using keyword matching. Deployed as a Flask web app.",
+        "technologies": ["Python", "Flask", "HTML", "CSS", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "ML Spam Detector",
+        "description": "Train a Naive Bayes classifier on SMS/email data. Web interface to type a message and check if it is spam.",
+        "technologies": ["Python", "Flask", "scikit-learn", "Pandas", "HTML", "CSS", "MySQL"]
+      },
+      {
+        "title": "Movie Recommendation System",
+        "description": "Collaborative filtering recommender trained on ratings dataset. Enter a movie title and get 5 similar recommendations.",
+        "technologies": ["Python", "Flask", "Pandas", "scikit-learn", "MySQL", "HTML", "JavaScript"]
+      },
+      {
+        "title": "Handwriting Recognition App",
+        "description": "Draw a digit on a canvas; a trained CNN predicts the number instantly. Model trained on MNIST dataset.",
+        "technologies": ["Python", "Flask", "TensorFlow", "JavaScript", "HTML", "CSS"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Real-Time Object Detection App",
+        "description": "Detect objects in a live webcam stream using YOLO. Annotated frames streamed to browser via Flask.",
+        "technologies": ["Python", "Flask", "OpenCV", "YOLO", "JavaScript", "MySQL"]
+      },
+      {
+        "title": "NLP Question Answering System",
+        "description": "Upload a PDF; system extracts text and answers natural-language questions using a Transformer model.",
+        "technologies": ["Python", "Flask", "Transformers", "MySQL", "JavaScript", "React"]
+      },
+      {
+        "title": "AI Code Review Bot",
+        "description": "Analyses student Python code for errors, style issues, and complexity. Returns detailed review with suggestions.",
+        "technologies": ["Python", "Flask", "AST", "MySQL", "JavaScript", "React"]
+      }
+    ]
+  },
+
+  "data_science_project": {
+    "Beginner": [
+      {
+        "title": "CSV Data Explorer",
+        "description": "Upload a CSV and instantly see column statistics, data types, and a preview table. Built with Pandas and Flask.",
+        "technologies": ["Python", "Flask", "Pandas", "HTML", "CSS"]
+      },
+      {
+        "title": "Simple Bar Chart Generator",
+        "description": "Upload tabular data; tool generates a bar chart using Matplotlib. Download the chart as PNG.",
+        "technologies": ["Python", "Flask", "Matplotlib", "HTML", "CSS"]
+      },
+      {
+        "title": "Student Grade Analyser",
+        "description": "Enter student marks; app calculates mean, median, pass/fail rate, and renders a grade distribution chart.",
+        "technologies": ["Python", "Flask", "Pandas", "Matplotlib", "MySQL", "HTML", "CSS"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Sales Trend Dashboard",
+        "description": "Upload monthly sales CSV; dashboard shows trend lines, top products, and seasonal patterns using Plotly.",
+        "technologies": ["Python", "Flask", "Pandas", "Plotly", "MySQL", "HTML", "JavaScript"]
+      },
+      {
+        "title": "COVID Data Visualisation",
+        "description": "Fetch public COVID dataset, clean with Pandas, and display interactive country-wise charts on a world map.",
+        "technologies": ["Python", "Flask", "Pandas", "Plotly", "HTML", "JavaScript"]
+      },
+      {
+        "title": "Housing Price Predictor",
+        "description": "Linear regression model predicts house price from area, rooms, and location features. Web form for predictions.",
+        "technologies": ["Python", "Flask", "scikit-learn", "Pandas", "MySQL", "HTML", "CSS"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Customer Churn Predictor",
+        "description": "Train a Random Forest on telecom data to predict customer churn. Interactive dashboard shows feature importance.",
+        "technologies": ["Python", "Flask", "scikit-learn", "Pandas", "React", "MySQL", "Docker"]
+      },
+      {
+        "title": "Real-Time Stock Market Analyser",
+        "description": "Stream live stock data via API, calculate moving averages, and display interactive candlestick charts.",
+        "technologies": ["Python", "Flask", "Pandas", "Plotly", "WebSocket", "MySQL", "React"]
+      },
+      {
+        "title": "Financial Fraud Detection System",
+        "description": "Anomaly detection on transaction data using Isolation Forest and AutoEncoder. Real-time alert dashboard.",
+        "technologies": ["Python", "Flask", "scikit-learn", "TensorFlow", "Pandas", "MySQL", "React"]
+      }
+    ]
+  },
+
+  "cyber_security_project": {
+    "Beginner": [
+      {
+        "title": "Password Strength Checker",
+        "description": "Enter a password and get an instant strength score (Weak/Fair/Strong) with improvement tips. No passwords stored.",
+        "technologies": ["Python", "Flask", "HTML", "CSS", "JavaScript"]
+      },
+      {
+        "title": "Caesar Cipher Tool",
+        "description": "Encrypt and decrypt messages using Caesar cipher. User selects shift value; tool shows cipher text in real time.",
+        "technologies": ["Python", "Flask", "HTML", "CSS", "JavaScript"]
+      },
+      {
+        "title": "Basic Port Scanner",
+        "description": "Enter an IP/hostname; tool scans a port range and reports open/closed ports. Result displayed in a table.",
+        "technologies": ["Python", "Flask", "HTML", "CSS"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Secure Password Manager",
+        "description": "Store encrypted passwords in MySQL. Master password decrypts vault locally. Clipboard copy and password generator.",
+        "technologies": ["Python", "Flask", "MySQL", "Cryptography", "HTML", "JavaScript"]
+      },
+      {
+        "title": "Network Traffic Analyser",
+        "description": "Capture network packets with Scapy, parse protocols, and display live packet summary in a Flask dashboard.",
+        "technologies": ["Python", "Flask", "Scapy", "MySQL", "HTML", "JavaScript"]
+      },
+      {
+        "title": "Phishing URL Detector",
+        "description": "ML model classifies URLs as phishing or legitimate based on lexical features. Web form for URL submission.",
+        "technologies": ["Python", "Flask", "scikit-learn", "Pandas", "MySQL", "HTML", "CSS"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Intrusion Detection System",
+        "description": "Monitor network traffic, detect anomalous patterns using ML, and trigger alerts with packet capture logging.",
+        "technologies": ["Python", "Flask", "scikit-learn", "Scapy", "MySQL", "React", "Docker"]
+      },
+      {
+        "title": "Secure File Sharing App",
+        "description": "AES-encrypted file upload/download platform. Files encrypted at rest, temporary signed URLs, and audit trail.",
+        "technologies": ["Python", "Flask", "MySQL", "Cryptography", "React", "Docker"]
+      },
+      {
+        "title": "Web Vulnerability Scanner",
+        "description": "Automated web vulnerability scanner — checks for SQLi, XSS, CSRF, open redirects, and security headers.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Docker"]
+      }
+    ]
+  },
+
+  "iot_project": {
+    "Beginner": [
+      {
+        "title": "LED Brightness Controller",
+        "description": "Control an LED brightness via a web slider. Arduino reads PWM signal from serial; Flask serves the control page.",
+        "technologies": ["Python", "Flask", "Arduino", "HTML", "CSS", "JavaScript"]
+      },
+      {
+        "title": "Temperature Monitor Dashboard",
+        "description": "DHT11 sensor reads temperature; Raspberry Pi sends data to Flask server. Dashboard shows current reading.",
+        "technologies": ["Python", "Flask", "Raspberry Pi", "MySQL", "HTML", "CSS"]
+      },
+      {
+        "title": "Button-Triggered Notification",
+        "description": "Press a physical button; Arduino sends signal via serial to Flask which emails or notifies the user.",
+        "technologies": ["Python", "Flask", "Arduino", "HTML", "CSS"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Smart Home Dashboard",
+        "description": "Control multiple GPIO pins (lights, fans) from a web dashboard. State persisted in MySQL; mobile-responsive UI.",
+        "technologies": ["Python", "Flask", "Raspberry Pi", "MySQL", "JavaScript", "HTML", "CSS"]
+      },
+      {
+        "title": "IoT Environment Monitor",
+        "description": "Multi-sensor station (temperature, humidity, air quality) feeds real-time data to a Plotly dashboard via MQTT.",
+        "technologies": ["Python", "Flask", "MQTT", "Raspberry Pi", "MySQL", "JavaScript", "Plotly"]
+      },
+      {
+        "title": "Plant Watering Automation System",
+        "description": "Soil moisture sensor triggers water pump via relay. Web dashboard shows moisture history and manual override.",
+        "technologies": ["Python", "Flask", "Arduino", "MySQL", "JavaScript", "HTML", "CSS"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Smart Energy Monitor",
+        "description": "Current sensors measure appliance power consumption. Real-time dashboard shows usage, cost, and carbon footprint.",
+        "technologies": ["Python", "Flask", "MQTT", "MySQL", "Raspberry Pi", "React", "Chart.js", "Docker"]
+      },
+      {
+        "title": "Industrial Anomaly Detector",
+        "description": "Vibration and temperature sensors feed ML model that detects machine anomalies before failure occurs.",
+        "technologies": ["Python", "Flask", "scikit-learn", "MQTT", "MySQL", "React", "Docker"]
+      },
+      {
+        "title": "Smart City Traffic System",
+        "description": "Traffic sensors count vehicles per lane; ML model adjusts signal timings dynamically. Live map dashboard.",
+        "technologies": ["Python", "Flask", "MQTT", "MySQL", "scikit-learn", "JavaScript", "React", "Leaflet.js"]
+      }
+    ]
+  },
+
+  "cloud_project": {
+    "Beginner": [
+      {
+        "title": "Static Site Deployment Guide",
+        "description": "Deploy a simple HTML/CSS site on AWS S3 / Netlify. Includes step-by-step documentation and Bash setup scripts.",
+        "technologies": ["HTML", "CSS", "AWS", "Bash"]
+      },
+      {
+        "title": "Dockerised Flask App",
+        "description": "Package a Flask app in a Docker container and run it locally. Includes Dockerfile, .dockerignore, and docs.",
+        "technologies": ["Python", "Flask", "Docker", "MySQL"]
+      },
+      {
+        "title": "Cloud File Storage App",
+        "description": "Upload files to AWS S3 via a Flask web form. Files listed with download links. Credentials managed via env vars.",
+        "technologies": ["Python", "Flask", "AWS", "MySQL", "HTML", "CSS"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Docker Compose Web Stack",
+        "description": "Flask + MySQL + Nginx all orchestrated with Docker Compose. One command spins up the full application stack.",
+        "technologies": ["Python", "Flask", "MySQL", "Docker", "Nginx"]
+      },
+      {
+        "title": "CI/CD Pipeline with GitHub Actions",
+        "description": "Automated test-and-deploy pipeline: push to GitHub triggers tests, builds Docker image, and deploys to AWS EC2.",
+        "technologies": ["Python", "Flask", "Docker", "AWS", "GitHub Actions"]
+      },
+      {
+        "title": "Serverless API with AWS Lambda",
+        "description": "Build a CRUD REST API deployed as serverless functions on AWS Lambda with DynamoDB as the database.",
+        "technologies": ["Python", "AWS Lambda", "DynamoDB", "API Gateway", "Serverless"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Kubernetes Microservices App",
+        "description": "Decompose a monolith into 3 microservices deployed on a Kubernetes cluster. Includes Helm charts and auto-scaling.",
+        "technologies": ["Python", "Flask", "Docker", "Kubernetes", "MySQL", "Helm", "GitHub Actions"]
+      },
+      {
+        "title": "Multi-Region Disaster Recovery",
+        "description": "Flask app deployed across two AWS regions. Route 53 health checks auto-failover on region outage.",
+        "technologies": ["Python", "Flask", "AWS", "Docker", "MySQL", "Terraform"]
+      },
+      {
+        "title": "Cloud Cost Optimiser Dashboard",
+        "description": "Fetches AWS Cost Explorer data, analyses spending by service and tag, and surfaces optimisation recommendations.",
+        "technologies": ["Python", "Flask", "AWS", "MySQL", "JavaScript", "React", "Docker"]
+      }
+    ]
+  },
+
+  "task_manager": {
+    "Beginner": [
+      {
+        "title": "Simple To-Do App",
+        "description": "Add, complete, and delete tasks from a clean interface. Data saved in MySQL so tasks persist across page refreshes.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      },
+      {
+        "title": "Priority To-Do List",
+        "description": "Assign High/Medium/Low priority to tasks. Sorted list view with colour-coded priorities and done/undone toggle.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      },
+      {
+        "title": "Daily Planner App",
+        "description": "Organise tasks by day. Calendar-style view shows tasks per date. Simple drag-and-drop reordering.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Team Task Board",
+        "description": "Kanban-style board with To-Do, In Progress, and Done columns. Tasks can be assigned to team members.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Project Management Tool",
+        "description": "Create projects with multiple tasks, set deadlines and assignees, receive deadline reminders via email.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Recurring Task Scheduler",
+        "description": "Set tasks that recur daily/weekly/monthly. Auto-generates new task entries and sends reminder notifications.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Full PM Suite with Gantt Chart",
+        "description": "End-to-end project management with Gantt chart visualisation, resource allocation, milestone tracking, and team chat.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Chart.js", "WebSocket"]
+      },
+      {
+        "title": "AI Task Prioritiser",
+        "description": "ML model suggests task priority based on deadline, dependencies, and historical completion patterns.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "JavaScript", "React"]
+      },
+      {
+        "title": "Enterprise Task REST API",
+        "description": "Fully RESTful task management API with JWT auth, role-based permissions, webhooks, and API rate limiting.",
+        "technologies": ["Python", "Flask", "MySQL", "Redis", "Docker", "REST API", "JWT"]
+      }
+    ]
+  },
+
+  "portfolio": {
+    "Beginner": [
+      {
+        "title": "Basic HTML Resume",
+        "description": "A single-page online resume with name, education, skills, and contact info. No JavaScript required.",
+        "technologies": ["HTML", "CSS"]
+      },
+      {
+        "title": "Animated Portfolio Page",
+        "description": "Personal portfolio with CSS animations, skills section, project cards, and a mailto contact button.",
+        "technologies": ["HTML", "CSS", "JavaScript"]
+      },
+      {
+        "title": "Portfolio with Photo Gallery",
+        "description": "Showcase your photos in a responsive grid with lightbox pop-ups. Admin adds images via a simple upload form.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Portfolio with Live Projects",
+        "description": "Dynamic portfolio that fetches your GitHub repos via API and displays them as project cards with live demo links.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "GitHub API"]
+      },
+      {
+        "title": "Portfolio Blog System",
+        "description": "Portfolio combined with a blog engine. Write/edit posts in Markdown; posts stored in MySQL. Responsive design.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Portfolio CMS",
+        "description": "Content management system lets you add/edit skills, projects, and testimonials from admin panel without touching code.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Portfolio with Analytics",
+        "description": "Portfolio site that tracks visitor count, page views, and time on page. Dashboard shows visual analytics to owner.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Chart.js"]
+      },
+      {
+        "title": "Full-Stack Portfolio Platform",
+        "description": "Multi-user portfolio platform — users register, build their own portfolio, and share a public URL. Admin moderation.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Docker"]
+      },
+      {
+        "title": "3D Interactive Portfolio",
+        "description": "Portfolio with Three.js 3D animations, WebGL effects, and API-driven content. Hosted on cloud with CI/CD pipeline.",
+        "technologies": ["JavaScript", "React", "Three.js", "Python", "Flask", "MySQL", "Docker"]
+      }
+    ]
+  },
+
+  "mobile_app": {
+    "Beginner": [
+      {
+        "title": "Simple Calculator App",
+        "description": "A basic calculator mobile app supporting arithmetic operations. Built with Flutter for cross-platform use.",
+        "technologies": ["Flutter", "Dart"]
+      },
+      {
+        "title": "Notes App",
+        "description": "Create, edit, and delete text notes. Data persisted locally using SQLite. Clean material design interface.",
+        "technologies": ["Flutter", "Dart", "SQLite"]
+      },
+      {
+        "title": "Unit Converter App",
+        "description": "Convert between units of length, weight, temperature, and currency. Offline-capable with local database.",
+        "technologies": ["Flutter", "Dart"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Expense Tracker Mobile App",
+        "description": "Log daily expenses by category. Shows monthly pie chart and bar graphs. Data synced with Firebase.",
+        "technologies": ["Flutter", "Dart", "Firebase", "Chart.js"]
+      },
+      {
+        "title": "Movie Browser App",
+        "description": "Browse and search movies from TMDB API. Save favourites locally. Smooth animations and responsive grid.",
+        "technologies": ["Flutter", "Dart", "REST API", "Firebase"]
+      },
+      {
+        "title": "Fitness Tracker App",
+        "description": "Log workouts, track daily steps with pedometer, set goals, and visualise progress with charts.",
+        "technologies": ["Flutter", "Dart", "Firebase", "SQLite"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Real-Time Chat App",
+        "description": "Cross-platform chat with authentication, group chats, push notifications, and media sharing via Firebase.",
+        "technologies": ["Flutter", "Dart", "Firebase", "FCM", "WebSocket"]
+      },
+      {
+        "title": "Ride Sharing App",
+        "description": "Uber-like mobile app with live driver tracking, fare calculation, OTP verification, and payment gateway.",
+        "technologies": ["Flutter", "Dart", "Firebase", "Google Maps", "REST API", "Stripe"]
+      },
+      {
+        "title": "E-Commerce Mobile App",
+        "description": "Full-featured shopping app with product catalogue, cart, checkout, payment integration, and order tracking.",
+        "technologies": ["Flutter", "Dart", "Firebase", "Razorpay", "REST API"]
+      }
+    ]
+  },
+
+  "blockchain_project": {
+    "Beginner": [
+      {
+        "title": "Simple Blockchain Simulator",
+        "description": "Build a basic blockchain from scratch in Python. Demonstrates hashing, blocks, chains, and proof-of-work.",
+        "technologies": ["Python", "Flask", "HTML", "CSS"]
+      },
+      {
+        "title": "Cryptocurrency Price Tracker",
+        "description": "Fetch live crypto prices from CoinGecko API and display in a clean dashboard with price change indicators.",
+        "technologies": ["Python", "Flask", "HTML", "CSS", "JavaScript"]
+      },
+      {
+        "title": "Simple Wallet Balance Checker",
+        "description": "Enter an Ethereum wallet address and fetch its balance via Web3.py. Displays transaction history.",
+        "technologies": ["Python", "Flask", "Web3.py", "HTML", "CSS"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "NFT Marketplace UI",
+        "description": "Frontend interface for browsing and listing NFTs. Connects to MetaMask wallet. Displays IPFS-hosted artwork.",
+        "technologies": ["JavaScript", "React", "Web3.js", "IPFS", "Solidity"]
+      },
+      {
+        "title": "Token Faucet DApp",
+        "description": "DApp that dispenses test tokens on a testnet. Smart contract in Solidity; UI with React and MetaMask integration.",
+        "technologies": ["Solidity", "JavaScript", "React", "Web3.js", "Hardhat"]
+      },
+      {
+        "title": "Decentralised Voting App",
+        "description": "Blockchain-based voting system. Smart contract ensures tamper-proof votes. Admin deploys candidates; users vote via DApp.",
+        "technologies": ["Solidity", "Python", "JavaScript", "React", "Web3.js", "Hardhat"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "DeFi Lending Protocol",
+        "description": "Decentralised lending and borrowing protocol. Smart contracts handle collateral, interest rates, and liquidation.",
+        "technologies": ["Solidity", "Hardhat", "JavaScript", "React", "Web3.js", "The Graph"]
+      },
+      {
+        "title": "Supply Chain Tracker on Blockchain",
+        "description": "Track product provenance from manufacturer to consumer. Each step recorded on blockchain for transparency.",
+        "technologies": ["Solidity", "Python", "Flask", "React", "Web3.js", "IPFS", "MySQL"]
+      },
+      {
+        "title": "Cross-Chain Bridge",
+        "description": "Bridge assets between two EVM-compatible chains. Includes lock-and-mint mechanism and oracle price feeds.",
+        "technologies": ["Solidity", "Hardhat", "JavaScript", "React", "Web3.js", "Chainlink"]
+      }
+    ]
+  },
+
+  "fintech_project": {
+    "Beginner": [
+      {
+        "title": "Personal Finance Dashboard",
+        "description": "Track income, expenses, and savings goals. Visual summary with pie charts. Data stored in MySQL.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      },
+      {
+        "title": "EMI Calculator",
+        "description": "Calculate loan EMI with amortisation schedule. Input loan amount, interest rate, and tenure.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask"]
+      },
+      {
+        "title": "Currency Converter",
+        "description": "Convert between 150+ currencies using live exchange rates from a free API. Historical rate chart included.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Investment Portfolio Tracker",
+        "description": "Track stocks, mutual funds, and crypto investments. Calculates returns, portfolio allocation, and P&L.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL", "REST API"]
+      },
+      {
+        "title": "Digital Wallet App",
+        "description": "Send and receive money between users. Transaction history, balance display, and QR code payments.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Bill Splitting App",
+        "description": "Split restaurant bills, trips, and shared expenses among friends. Track who owes what and settle with reminders.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Algorithmic Trading Platform",
+        "description": "Backtesting framework for trading strategies. Live paper trading via broker API with performance analytics.",
+        "technologies": ["Python", "Flask", "Pandas", "NumPy", "React", "MySQL", "Redis", "Docker"]
+      },
+      {
+        "title": "Credit Scoring Engine",
+        "description": "ML model predicts creditworthiness from financial behaviour data. Explainable AI dashboard shows key factors.",
+        "technologies": ["Python", "Flask", "scikit-learn", "Pandas", "React", "MySQL", "Docker"]
+      },
+      {
+        "title": "Open Banking API Platform",
+        "description": "Aggregates accounts from multiple banks via Open Banking APIs. Provides spending analytics and savings goals.",
+        "technologies": ["Python", "Flask", "REST API", "MySQL", "React", "Docker", "JWT"]
+      }
+    ]
+  },
+
+  "quiz_app": {
+    "Beginner": [
+      {
+        "title": "Static Quiz Page",
+        "description": "A 5-question multiple-choice quiz hardcoded in HTML/JavaScript that shows the final score at the end.",
+        "technologies": ["HTML", "CSS", "JavaScript"]
+      },
+      {
+        "title": "Database-Driven Quiz",
+        "description": "Quiz questions stored in MySQL. Admin can add/edit questions. Students take quiz and score is shown on completion.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      },
+      {
+        "title": "Category Quiz Selector",
+        "description": "Choose quiz category (Math, Science, English) from a menu. Questions fetched by category from MySQL.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Timed Quiz Application",
+        "description": "Countdown timer per question, auto-submit on timeout, leaderboard showing top scores, and user login to track history.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Teacher Quiz Builder",
+        "description": "Teachers create custom quizzes, assign to classes, and view per-student results. Students get instant feedback.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Adaptive Quiz Engine",
+        "description": "Quiz dynamically adjusts question difficulty based on previous answers using a simple scoring algorithm.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Online Exam Proctoring System",
+        "description": "Full exam portal with webcam-based proctoring (screenshot capture), randomised question order, and anti-tab-switch detection.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "OpenCV"]
+      },
+      {
+        "title": "AI Question Generator",
+        "description": "NLP model generates quiz questions from uploaded PDF study material. Exports to printable format or online quiz mode.",
+        "technologies": ["Python", "Flask", "MySQL", "NLP", "Transformers", "React"]
+      },
+      {
+        "title": "Multiplayer Quiz Game",
+        "description": "Real-time multiplayer quiz where multiple students compete simultaneously. Live score updates via WebSocket.",
+        "technologies": ["Python", "Flask", "Flask-SocketIO", "MySQL", "JavaScript", "React"]
+      }
+    ]
+  },
+
+  "expense_tracker": {
+    "Beginner": [
+      {
+        "title": "Daily Spending Log",
+        "description": "Simple form to log daily expenses by category (food, transport, etc.). View monthly totals in a table.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Budget Goal Tracker",
+        "description": "Set a monthly budget goal and log expenses. A progress bar shows how much of the budget is used.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      },
+      {
+        "title": "Receipt Upload Tracker",
+        "description": "Upload receipt images with expense amount and category. Admin views expenses in a sortable table.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Multi-Category Expense Dashboard",
+        "description": "Track income and expenses across categories with monthly pie charts, bar graphs, and budget alerts.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Chart.js", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Family Budget Manager",
+        "description": "Multi-user family budget app. Each member logs expenses; shared dashboard shows family totals.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Expense Sharing App",
+        "description": "Split bills between friends, track who owes what, and settle balances. Expense history with detailed breakdown.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "AI Expense Predictor",
+        "description": "ML model trained on past spending predicts next month's expenses by category. REST API backend with React dashboard.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "React", "Chart.js"]
+      },
+      {
+        "title": "Expense Tracker with Bank Integration",
+        "description": "Connects to bank CSV exports, auto-categorises transactions with NLP, and shows trends on analytics dashboard.",
+        "technologies": ["Python", "Flask", "MySQL", "NLP", "React", "Chart.js", "Docker"]
+      },
+      {
+        "title": "Financial Planning Platform",
+        "description": "Comprehensive personal finance tool — budgets, goals, debt tracker, investment tracker, and AI-based savings suggestions.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "JavaScript", "React", "Docker"]
+      }
+    ]
+  },
+
+  "employee_management": {
+    "Beginner": [
+      {
+        "title": "Employee List App",
+        "description": "View a list of employees with name, department, and role. Admin can add or delete records.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Employee Profile Manager",
+        "description": "Each employee has a profile page with photo, contact info, and designation. Admin can edit profiles.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      },
+      {
+        "title": "Department Organisation Chart",
+        "description": "Visual org chart showing company hierarchy. Data pulled from MySQL; admin updates structure via form.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Leave Management System",
+        "description": "Employees apply for leave online. Manager approves/rejects. Leave balance tracked per employee in MySQL.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Payroll Calculator App",
+        "description": "Calculate gross pay, tax deductions, and net salary from hours worked. Payslips downloadable as PDF.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "HR Dashboard with Analytics",
+        "description": "Admin dashboard showing headcount by department, attrition rate, leave trends, and salary distribution charts.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Chart.js", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Full HRMS Platform",
+        "description": "Complete HR system — recruitment, onboarding, attendance, performance reviews, payroll, and exit management.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Docker"]
+      },
+      {
+        "title": "AI Employee Attrition Predictor",
+        "description": "ML model predicts which employees are likely to resign based on satisfaction scores, tenure, and performance data.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "Pandas", "React"]
+      },
+      {
+        "title": "Employee Self-Service Portal",
+        "description": "Employees log in to view payslips, apply for leave, update details, and access company documents. Full REST API.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Docker", "REST API"]
+      }
+    ]
+  },
+
+  "food_ordering": {
+    "Beginner": [
+      {
+        "title": "Static Menu Page",
+        "description": "Beautiful HTML/CSS food menu for a single restaurant. Items grouped by category with prices.",
+        "technologies": ["HTML", "CSS"]
+      },
+      {
+        "title": "Restaurant Menu with Database",
+        "description": "Menu items stored in MySQL. Admin adds/updates items via a form. Customers browse from the same page.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "MySQL"]
+      },
+      {
+        "title": "Canteen Daily Menu Poster",
+        "description": "School or office canteen posts today's menu. Admin updates it daily. Displays current time and meal timing.",
+        "technologies": ["HTML", "CSS", "Python", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Food Order and Bill Generator",
+        "description": "Customer selects items, adds to cart, places order, and gets a printable bill. Orders saved in MySQL.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Restaurant Online Ordering System",
+        "description": "Full table reservation + food pre-order system. User login, real-time kitchen status, and SMS notification on ready.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      },
+      {
+        "title": "Multi-Restaurant Food App",
+        "description": "Multiple restaurants listed; user browses menus, places orders, and tracks delivery status.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Food Delivery Platform",
+        "description": "Full delivery ecosystem — restaurants, riders, and customers. Live order tracking map, payment gateway, admin panel.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Leaflet.js", "Razorpay"]
+      },
+      {
+        "title": "AI Food Recommendation Engine",
+        "description": "Recommends dishes based on order history and dietary preferences using collaborative filtering.",
+        "technologies": ["Python", "Flask", "MySQL", "scikit-learn", "JavaScript", "React"]
+      },
+      {
+        "title": "Cloud Kitchen Management System",
+        "description": "Multi-brand cloud kitchen backend: order routing, inventory, cost analysis, and customer loyalty program.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Docker", "Redis"]
+      }
+    ]
+  },
+
+  "chat_app": {
+    "Beginner": [
+      {
+        "title": "Static Chat UI",
+        "description": "A styled chat-room look built with HTML/CSS only. No real functionality — a pure UI exercise.",
+        "technologies": ["HTML", "CSS"]
+      },
+      {
+        "title": "Basic Chat Room",
+        "description": "Simple WebSocket chat where multiple browser tabs can exchange messages in real time. No login required.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "Flask-SocketIO"]
+      },
+      {
+        "title": "Chat with Username",
+        "description": "Assign a username before entering the chat room. Messages show sender name and timestamp. History stored in MySQL.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Private Messaging App",
+        "description": "User login, find other users, send private messages, and see online/offline status with read receipts.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL", "Flask-SocketIO"]
+      },
+      {
+        "title": "Group Chat with Rooms",
+        "description": "Create or join named chat rooms. Messages persist in MySQL. Admin can mute/kick users from rooms.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL", "Flask-SocketIO"]
+      },
+      {
+        "title": "Chat App with File Sharing",
+        "description": "Send text and upload images/files in chat. Preview images inline; file links stored in DB.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL", "Flask-SocketIO"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "Encrypted Messaging Platform",
+        "description": "End-to-end encrypted chat using RSA/AES. Key exchange on login; messages decrypted only on recipient device.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Cryptography", "WebSocket"]
+      },
+      {
+        "title": "Video Conference App",
+        "description": "Multi-user video and audio calls using WebRTC with a text chat sidebar. Room links shareable by URL.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "WebRTC"]
+      },
+      {
+        "title": "AI Chatbot Integration Platform",
+        "description": "Messenger platform with plugin-based chatbot support. Bots answer FAQ, schedule meetings, and escalate to human agents.",
+        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "NLP", "WebSocket"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "website": {
+    "Frontend": {
+      "skills": ["HTML", "CSS", "JavaScript", "React"],
+      "weights": {"HTML": 1, "CSS": 1, "JavaScript": 3, "React": 4}
+    },
+    "Backend": {
+      "skills": ["Python", "Flask"],
+      "weights": {"Python": 3, "Flask": 3}
+    },
+    "Database": {
+      "skills": ["MySQL"],
+      "weights": {"MySQL": 3}
+    },
+    "dependencies": {
+      "React": ["HTML", "CSS", "JavaScript"],
+      "Flask": ["Python"],
+      "MySQL": ["Python"]
+    },
+    "learning_resources": {
+      "HTML": {"title": "HTML Foundations", "link": "https://developer.mozilla.org/en-US/docs/Learn/HTML", "time": "1 week"},
+      "CSS": {"title": "CSS Fundamentals", "link": "https://web.dev/learn/css", "time": "1 week"},
+      "JavaScript": {"title": "JavaScript Essentials", "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide", "time": "2-3 weeks"},
+      "React": {"title": "React Framework", "link": "https://react.dev/learn", "time": "3-4 weeks"},
+      "Python": {"title": "Python Programming", "link": "https://docs.python.org/3/tutorial/", "time": "2-3 weeks"},
+      "Flask": {"title": "Flask Web Framework", "link": "https://flask.palletsprojects.com/en/3.0.x/tutorial/", "time": "1-2 weeks"},
+      "MySQL": {"title": "MySQL Database", "link": "https://dev.mysql.com/doc/refman/8.0/en/tutorial.html", "time": "1-2 weeks"}
+    }
+  },
+  "app": {
+    "Frontend": {
+      "skills": ["React Native"],
+      "weights": {"React Native": 4}
+    },
+    "Backend": {
+      "skills": ["Java", "Kotlin", "REST API"],
+      "weights": {"Java": 4, "Kotlin": 4, "REST API": 3}
+    },
+    "Database": {
+      "skills": ["Firebase"],
+      "weights": {"Firebase": 3}
+    },
+    "dependencies": {
+      "Kotlin": ["Java"],
+      "React Native": ["JavaScript"],
+      "Firebase": ["JavaScript"]
+    },
+    "learning_resources": {
+      "Java": {"title": "Java Programming", "link": "https://dev.java/learn/", "time": "4-6 weeks"},
+      "Kotlin": {"title": "Kotlin for Android", "link": "https://kotlinlang.org/docs/getting-started.html", "time": "3-4 weeks"},
+      "React Native": {"title": "React Native Mobile", "link": "https://reactnative.dev/docs/getting-started", "time": "3-4 weeks"},
+      "Firebase": {"title": "Firebase Platform", "link": "https://firebase.google.com/docs", "time": "1-2 weeks"},
+      "REST API": {"title": "REST API Design", "link": "https://restfulapi.net/", "time": "1-2 weeks"}
+    }
+  },
+  "other": {
+    "Frontend": {"skills": [], "weights": {}},
+    "Backend": {
+      "skills": ["Python", "Flask"],
+      "weights": {"Python": 3, "Flask": 3}
+    },
+    "Database": {
+      "skills": ["MySQL"],
+      "weights": {"MySQL": 3}
+    },
+    "dependencies": {
+      "Flask": ["Python"]
+    },
+    "learning_resources": {
+      "Python": {"title": "Python Programming", "link": "https://docs.python.org/3/tutorial/", "time": "2-3 weeks"},
+      "Flask": {"title": "Flask Web Framework", "link": "https://flask.palletsprojects.com/en/3.0.x/tutorial/", "time": "1-2 weeks"},
+      "MySQL": {"title": "MySQL Database", "link": "https://dev.mysql.com/doc/refman/8.0/en/tutorial.html", "time": "1-2 weeks"}
+    }
+  }
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "keywords": ["attendance", "attend", "present", "absent", "roll call", "mark present", "absentee", "biometric", "face recognition", "qr attendance"],
+    "category": "attendance_system",
+    "domain": "Education"
+  },
+  {
+    "keywords": ["library", "book", "borrow", "isbn", "catalog", "librarian", "book issue", "book return", "e-library"],
+    "category": "library_system",
+    "domain": "Education"
+  },
+  {
+    "keywords": ["hospital", "doctor", "patient", "clinic", "appointment", "medicine", "health", "medical", "prescription", "pharmacy", "telemedicine"],
+    "category": "hospital_system",
+    "domain": "Medical"
+  },
+  {
+    "keywords": ["shop", "store", "buy", "sell", "ecommerce", "e-commerce", "product", "cart", "order", "purchase", "marketplace", "checkout", "vendor"],
+    "category": "ecommerce",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["chat", "message", "talk", "real time", "communication", "messenger", "group chat", "instant message", "socket", "websocket"],
+    "category": "chat_app",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["portfolio", "resume", "cv", "personal site", "showcase", "about me"],
+    "category": "portfolio",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["quiz", "exam", "test", "mcq", "question", "answer", "assessment", "grade", "test portal", "proctoring"],
+    "category": "quiz_app",
+    "domain": "Education"
+  },
+  {
+    "keywords": ["expense", "budget", "money", "finance", "spend", "income", "cost", "payment", "savings", "wallet", "financial"],
+    "category": "expense_tracker",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["todo", "task", "to do", "reminder", "checklist", "planner", "schedule", "kanban", "deadline", "project management"],
+    "category": "task_manager",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["food", "restaurant", "order food", "meal", "delivery", "menu", "canteen", "kitchen", "cuisine"],
+    "category": "food_ordering",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["employee", "staff", "hr", "payroll", "leave", "salary", "worker", "department", "human resource", "onboarding"],
+    "category": "employee_management",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["news", "article", "blog", "post", "feed", "headline", "content", "publish", "editorial"],
+    "category": "blog",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["weather", "forecast", "temperature", "rain", "climate", "humidity", "wind"],
+    "category": "weather_app",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["inventory", "stock", "warehouse", "supply", "goods", "product management", "barcode"],
+    "category": "inventory_system",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["artificial intelligence", "machine learning", "deep learning", "neural network", "nlp", "natural language", "computer vision", "image recognition", "chatbot", "recommendation", "ai", "ml", "dl"],
+    "category": "ai_project",
+    "domain": "Artificial Intelligence"
+  },
+  {
+    "keywords": ["data science", "data analysis", "visualization", "dashboard", "analytics", "prediction", "statistics", "dataset", "pandas", "matplotlib", "plotly"],
+    "category": "data_science_project",
+    "domain": "Data Science"
+  },
+  {
+    "keywords": ["cyber security", "cybersecurity", "encryption", "hacking", "firewall", "vulnerability", "intrusion", "network security", "password manager", "phishing", "malware", "pen test"],
+    "category": "cyber_security_project",
+    "domain": "Cyber Security"
+  },
+  {
+    "keywords": ["iot", "internet of things", "sensor", "arduino", "raspberry pi", "smart home", "automation", "embedded", "gpio", "microcontroller"],
+    "category": "iot_project",
+    "domain": "IoT"
+  },
+  {
+    "keywords": ["cloud", "aws", "deployment", "devops", "docker", "kubernetes", "microservice", "serverless", "ci cd", "pipeline"],
+    "category": "cloud_project",
+    "domain": "Cloud Computing"
+  },
+  {
+    "keywords": ["mobile app", "android", "ios", "flutter", "react native", "kotlin", "swift", "mobile development"],
+    "category": "mobile_app",
+    "domain": "Mobile App Development"
+  },
+  {
+    "keywords": ["blockchain", "crypto", "nft", "smart contract", "ethereum", "solidity", "decentralized", "web3", "defi", "token"],
+    "category": "blockchain_project",
+    "domain": "Blockchain"
+  },
+  {
+    "keywords": ["fintech", "banking", "loan", "insurance", "trading", "stock", "investment", "mutual fund", "payment gateway", "upi"],
+    "category": "fintech_project",
+    "domain": "FinTech"
+  },
+  {
+    "keywords": ["game", "gaming", "unity", "pygame", "multiplayer", "2d game", "3d game", "game engine", "sprite"],
+    "category": "game_project",
+    "domain": "Game Development"
+  },
+  {
+    "keywords": ["social network", "social media", "follow", "friend", "post", "like", "comment", "profile", "social app"],
+    "category": "social_media",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["hotel", "booking", "reservation", "room", "check in", "check out", "hospitality", "property management"],
+    "category": "hotel_booking",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["transport", "ride", "taxi", "cab", "booking", "gps", "map", "route", "navigation", "vehicle"],
+    "category": "transport_system",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["recruitment", "job", "hiring", "resume", "applicant", "interview", "placement", "career", "job portal"],
+    "category": "recruitment_system",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["agriculture", "farm", "crop", "irrigation", "precision farming", "soil", "harvest", "weather farming"],
+    "category": "agriculture_project",
+    "domain": "IoT"
+  },
+  {
+    "keywords": ["real estate", "property", "apartment", "rent", "buy house", "listing", "agent", "mortgage"],
+    "category": "real_estate",
+    "domain": "Web Development"
+  },
+  {
+    "keywords": ["fitness", "workout", "gym", "health tracker", "calories", "steps", "exercise", "bmi", "diet"],
+    "category": "fitness_app",
+    "domain": "Mobile App Development"
+  }
+]

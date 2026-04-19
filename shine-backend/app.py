@@ -1,0 +1,58 @@
+"""
+app.py — SHINE Access Point Backend Entry Point
+Run: python app.py
+Backend will start at: http://localhost:PORT (default 5000)
+"""
+
+from flask import Flask
+from flask_cors import CORS
+
+from config import FLASK_PORT, FLASK_SECRET
+from routes.auth_routes    import auth_bp
+from routes.project_routes import project_bp
+from routes.skill_routes   import skill_bp
+from routes.history_routes import history_bp
+
+app = Flask(__name__)
+
+# ── Session secret key (from env var or fallback) ────────────────────
+app.secret_key = FLASK_SECRET
+
+# ── CORS: allow the React dev server to make credentialed requests ──
+CORS(
+    app,
+    supports_credentials=True,
+    origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://localhost:5174",
+        "http://localhost:8080",
+        "http://localhost:8081",
+        # Add your deployed frontend URL here later
+    ]
+)
+
+# ── Register blueprints ─────────────────────────────────────────────
+app.register_blueprint(auth_bp)
+app.register_blueprint(project_bp)
+app.register_blueprint(skill_bp)
+app.register_blueprint(history_bp)
+
+
+# ── Health-check endpoint ───────────────────────────────────────────
+@app.route('/')
+def index():
+    return {
+        "message": "SHINE Access Point Backend is running",
+        "status":  "ok",
+        "version": "2.0.0"
+    }
+
+
+if __name__ == '__main__':
+    print("=" * 55)
+    print("  SHINE Access Point — Flask Backend v2.0")
+    print(f"  Running at: http://localhost:{FLASK_PORT}")
+    print("  Make sure MySQL is running and schema.sql was executed.")
+    print("=" * 55)
+    app.run(debug=True, port=FLASK_PORT)
