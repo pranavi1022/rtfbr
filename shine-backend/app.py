@@ -4,6 +4,7 @@ Run: python app.py
 Backend will start at: http://localhost:PORT (default 5000)
 """
 
+import os
 from flask import Flask
 from flask_cors import CORS
 
@@ -18,18 +19,25 @@ app = Flask(__name__)
 # ── Session secret key (from env var or fallback) ────────────────────
 app.secret_key = FLASK_SECRET
 
-# ── CORS: allow the React dev server to make credentialed requests ──
+# ── CORS: allow the React dev server + deployed frontend ────────────
+frontend_origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost:5174",
+    "http://localhost:8080",
+    "http://localhost:8081",
+    "https://rtfbr-1.onrender.com",
+]
+
+# Also allow a custom frontend URL from env (e.g., FRONTEND_URL)
+custom_frontend = os.environ.get("FRONTEND_URL")
+if custom_frontend:
+    frontend_origins.append(custom_frontend.rstrip("/"))
+
 CORS(
     app,
     supports_credentials=True,
-    origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://localhost:5174",
-        "http://localhost:8080",
-        "http://localhost:8081",
-        # Add your deployed frontend URL here later
-    ]
+    origins=frontend_origins
 )
 
 # ── Register blueprints ─────────────────────────────────────────────

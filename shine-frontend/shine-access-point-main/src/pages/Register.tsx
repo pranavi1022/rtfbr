@@ -34,7 +34,7 @@ const Register = () => {
 
                     <div className="inline-block group relative bg-gradient-to-b from-white/10 to-white/5 p-px rounded-2xl backdrop-blur-lg overflow-hidden shadow-[0_0_40px_rgba(120,80,255,0.08)]">
                         <div className="rounded-[1.15rem] px-8 py-8 backdrop-blur-md bg-white/[0.05] border border-white/10">
-                            <form method="POST" action="/api/register" className="space-y-4 text-left">
+                            <form className="space-y-4 text-left">
                                 <div className="space-y-2">
                                     <Label htmlFor="fullname" className="text-white/90">Full Name</Label>
                                     <Input id="fullname" name="fullname" type="text" placeholder="Enter your full name" required className="bg-white/[0.04] border-white/10 text-white placeholder:text-white/30 focus-visible:ring-primary/50 focus-visible:border-primary/40" />

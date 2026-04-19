@@ -67,7 +67,7 @@ const Index = () => {
         setIsLogin(true);
       }
     } catch {
-      toast.error("Connection error. Make sure the backend is running on port 5000.");
+      toast.error("Connection error. Please check your internet connection or try again later.");
     } finally {
       setIsSubmitting(false);
     }

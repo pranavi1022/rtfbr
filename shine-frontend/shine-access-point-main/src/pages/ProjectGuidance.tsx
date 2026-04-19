@@ -131,7 +131,7 @@ const ProjectGuidance = () => {
       setMatchSource(data.match_source || "");
     } catch (err) {
       console.error("Project guidance error:", err);
-      setFetchError("Could not connect to the server. Make sure the Flask backend is running.");
+      setFetchError("Could not connect to the server. Please check your connection or try again later.");
       setResults([]);
     } finally {
       setLoading(false);
