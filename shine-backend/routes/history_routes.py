@@ -11,6 +11,7 @@ so the Dashboard still works even when the database is offline.
 
 from flask import Blueprint, request, jsonify, session
 from logic.keyword_matcher import get_db_connection
+from config import DB_TYPE
 import time
 
 history_bp = Blueprint('history', __name__)
@@ -26,18 +27,35 @@ def _ensure_table(conn):
     """Create user_activity table if it doesn't exist."""
     try:
         cursor = conn.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS user_activity (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id INT NOT NULL,
-                project_name VARCHAR(255) NOT NULL,
-                level VARCHAR(50) DEFAULT '',
-                missing_skills INT DEFAULT 0,
-                action VARCHAR(50) DEFAULT 'search',
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                INDEX idx_user_id (user_id)
-            )
-        """)
+        if DB_TYPE == "postgresql":
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS user_activity (
+                    id SERIAL PRIMARY KEY,
+                    user_id INT NOT NULL,
+                    project_name VARCHAR(255) NOT NULL,
+                    level VARCHAR(50) DEFAULT '',
+                    missing_skills INT DEFAULT 0,
+                    action VARCHAR(50) DEFAULT 'search',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_user_activity_user_id
+                ON user_activity (user_id)
+            """)
+        else:
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS user_activity (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    user_id INT NOT NULL,
+                    project_name VARCHAR(255) NOT NULL,
+                    level VARCHAR(50) DEFAULT '',
+                    missing_skills INT DEFAULT 0,
+                    action VARCHAR(50) DEFAULT 'search',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    INDEX idx_user_id (user_id)
+                )
+            """)
         conn.commit()
         cursor.close()
     except Exception as e:

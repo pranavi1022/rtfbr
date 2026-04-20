@@ -2,7 +2,7 @@
 logic/keyword_matcher.py
 
 Three-layer keyword matching:
-  Layer 1 → MySQL keywords table  — exact / partial match (primary)
+  Layer 1 → DB keywords table     — exact / partial match (primary)
   Layer 2 → JSON dataset          — only on STRONG keyword hit
   Layer 3 → Generic domain-based  — always returns something meaningful
 
@@ -12,6 +12,10 @@ get_db_connection() is also imported by:
   - routes/auth_routes.py
   - routes/project_routes.py
 
+Dual-database support:
+  - PostgreSQL (Render / production) when DATABASE_URL is set
+  - MySQL (local development) otherwise
+
 CRITICAL FIX: get_db_connection() now returns None on failure instead of
 raising, so all callers can check `if conn is None` and skip safely to the
 next fallback layer without blocking.
@@ -19,18 +23,49 @@ next fallback layer without blocking.
 
 import json
 import os
-import mysql.connector
-from config import DB_CONFIG
+from config import DB_CONFIG, DB_TYPE
+
+# ── Database driver imports (conditional based on DB_TYPE) ────────────────
+if DB_TYPE == "postgresql":
+    import psycopg2
+    from psycopg2.extras import RealDictCursor
+else:
+    import mysql.connector
+
+
+# ── PostgreSQL connection wrapper ─────────────────────────────────────────
+# Bridges psycopg2's API to match mysql.connector's cursor(dictionary=True)
+# so that ALL existing caller code works without modification.
+
+class _PgConnWrapper:
+    """Thin wrapper around a psycopg2 connection."""
+
+    def __init__(self, conn):
+        self._conn = conn
+
+    def cursor(self, dictionary=False):
+        if dictionary:
+            return self._conn.cursor(cursor_factory=RealDictCursor)
+        return self._conn.cursor()
+
+    def commit(self):
+        self._conn.commit()
+
+    def close(self):
+        self._conn.close()
 
 
 # ── SAFE connection helper ────────────────────────────────────────────────
 
 def get_db_connection():
     """
-    Return a live MySQL connection, or None if the connection fails.
+    Return a live database connection, or None if the connection fails.
 
-    Uses connect_timeout=5 from DB_CONFIG to fail fast rather than
-    blocking the Flask thread for minutes.
+    Uses connect_timeout=5 to fail fast rather than blocking the Flask
+    thread for minutes.
+
+    Automatically selects PostgreSQL (Render) or MySQL (local) based on
+    the DB_TYPE setting in config.py.
 
     All callers MUST check:
         conn = get_db_connection()
@@ -38,17 +73,19 @@ def get_db_connection():
             <skip to next fallback layer>
     """
     try:
-        conn = mysql.connector.connect(
-            **DB_CONFIG,
-            connection_timeout=5   # belt-and-suspenders: enforce 5s timeout
-        )
-        print("[DB] [OK] Connection established")
-        return conn
-    except mysql.connector.Error as e:
-        print(f"[DB] [FAIL] Connection failed (mysql): {e}")
-        return None
+        if DB_TYPE == "postgresql":
+            conn = psycopg2.connect(**DB_CONFIG)
+            print("[DB] [OK] PostgreSQL connection established")
+            return _PgConnWrapper(conn)
+        else:
+            conn = mysql.connector.connect(
+                **DB_CONFIG,
+                connection_timeout=5   # belt-and-suspenders: enforce 5s timeout
+            )
+            print("[DB] [OK] MySQL connection established")
+            return conn
     except Exception as e:
-        print(f"[DB] [FAIL] Connection failed (unexpected): {e}")
+        print(f"[DB] [FAIL] Connection failed ({DB_TYPE}): {e}")
         return None
 
 

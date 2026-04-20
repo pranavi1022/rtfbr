@@ -37,6 +37,10 @@ Guarantees:
 import json
 import os
 from logic.keyword_matcher import match_keyword, get_db_connection
+from config import DB_TYPE
+
+# SQL dialect: PostgreSQL uses RANDOM(), MySQL uses RAND()
+_SQL_RANDOM = "RANDOM()" if DB_TYPE == "postgresql" else "RAND()"
 
 # Path to the rich JSON project fallback database
 _JSON_PROJECTS_PATH = os.path.join(
@@ -77,11 +81,11 @@ def _fetch_by_category_and_difficulty(cursor, category: str, difficulty: str) ->
     with inconsistent casing (e.g. 'beginner' vs 'Beginner') are not missed.
     """
     cursor.execute(
-        """SELECT DISTINCT title, description, domain, difficulty, technologies
+        f"""SELECT DISTINCT title, description, domain, difficulty, technologies
            FROM projects
            WHERE LOWER(category)   = LOWER(%s)
              AND LOWER(difficulty) = LOWER(%s)
-           ORDER BY RAND()
+           ORDER BY {_SQL_RANDOM}
            LIMIT 10""",
         (category.strip().lower(), difficulty.strip())
     )
@@ -215,11 +219,11 @@ def get_project_suggestions(interest: str, domain: str, difficulty: str) -> dict
             if not _dedup(raw_projects):
                 print(f"[project_engine]  ⚠️  Category empty — trying domain fallback: {matched_domain!r}")
                 cursor.execute(
-                    """SELECT DISTINCT title, description, domain, difficulty, technologies
+                    f"""SELECT DISTINCT title, description, domain, difficulty, technologies
                        FROM projects
                        WHERE LOWER(domain)     = LOWER(%s)
                          AND LOWER(difficulty) = LOWER(%s)
-                       ORDER BY RAND()
+                       ORDER BY {_SQL_RANDOM}
                        LIMIT 10""",
                     (matched_domain.strip(), difficulty.strip())
                 )

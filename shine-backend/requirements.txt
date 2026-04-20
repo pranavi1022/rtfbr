@@ -1,6 +1,7 @@
 flask
 flask-cors
 mysql-connector-python
+psycopg2-binary
 werkzeug
 python-dotenv
 gunicorn

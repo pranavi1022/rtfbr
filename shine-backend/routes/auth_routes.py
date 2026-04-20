@@ -134,11 +134,11 @@ def register():
         conn.close()
         return jsonify({"message": "Registration successful"}), 201
     except Exception as e:
-        err_str = str(e)
-        if "Duplicate entry" in err_str:
-            if "username" in err_str:
+        err_lower = str(e).lower()
+        if "duplicate" in err_lower:
+            if "username" in err_lower:
                 return jsonify({"error": "Username already taken"}), 409
-            if "email" in err_str:
+            if "email" in err_lower:
                 return jsonify({"error": "Email already registered"}), 409
         print(f"[auth] register error: {e}")
         return jsonify({"error": "Registration failed. Please try again."}), 500

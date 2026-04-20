@@ -81,7 +81,7 @@ def fetch_learning_resources(skill_name: str) -> list:
                 """SELECT resource_title, resource_link
                    FROM learning_resources
                    WHERE LOWER(skill_name) = LOWER(%s)
-                   ORDER BY FIELD(difficulty, 'Beginner', 'Intermediate', 'Advanced')""",
+                   ORDER BY CASE difficulty WHEN 'Beginner' THEN 1 WHEN 'Intermediate' THEN 2 WHEN 'Advanced' THEN 3 ELSE 4 END""",
                 (skill_name.strip(),)
             )
             rows = cursor.fetchall()
