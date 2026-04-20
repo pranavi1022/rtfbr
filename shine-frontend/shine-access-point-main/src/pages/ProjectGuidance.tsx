@@ -54,6 +54,7 @@ async function fetchProjectSuggestions(input: {
 
   // Save activity for dashboard history (fire-and-forget)
   if (data.projects?.length > 0) {
+    const localId = localStorage.getItem("shine_user_id");
     fetch(`${API_BASE}/api/save-activity`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -63,6 +64,7 @@ async function fetchProjectSuggestions(input: {
         level: input.level,
         missing_skills: 0,
         action: "search",
+        user_id: localId ? parseInt(localId, 10) : undefined,
       }),
     }).catch(() => {}); // ignore errors
   }

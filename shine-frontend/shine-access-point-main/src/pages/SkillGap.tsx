@@ -107,6 +107,7 @@ const SkillGap = () => {
       setResult(data);
 
       // Save activity for dashboard history (fire-and-forget)
+      const localId = localStorage.getItem("shine_user_id");
       fetch(`${API_BASE}/api/save-activity`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -116,6 +117,7 @@ const SkillGap = () => {
           level: data.level || projectType,
           missing_skills: data.missingCount || 0,
           action: "skill_gap",
+          user_id: localId ? parseInt(localId, 10) : undefined,
         }),
       }).catch(() => {});
     } catch (err) {

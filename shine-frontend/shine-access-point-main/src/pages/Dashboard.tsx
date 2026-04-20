@@ -53,21 +53,36 @@ const Dashboard = () => {
   const [progressData, setProgress]  = useState<ProgressItem[]>([]);
   const [loadingActivity, setLoadingActivity] = useState(true);
 
-  // ── Fetch user identity from session ───────────────────────────────
+  // ── Fetch user identity from session OR localStorage ───────────────────────────────
   useEffect(() => {
     (async () => {
+      const localId = localStorage.getItem("shine_user_id");
+      const localName = localStorage.getItem("shine_username");
+      if (localId) {
+        setUserId(parseInt(localId, 10));
+        if (localName) setUsername(localName);
+      }
+      
       try {
         const res = await fetch(`${API_BASE}/api/me`, { credentials: "include" });
         if (res.ok) {
           const data = await res.json();
-          setUsername(data.username || "Student");
-          setUserId(data.user_id);
+          setUsername(data.username || localName || "Student");
+          setUserId(data.user_id || (localId ? parseInt(localId, 10) : null));
         }
       } catch {
         // not logged in — Dashboard still renders with defaults
       }
     })();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("shine_user_id");
+    localStorage.removeItem("shine_username");
+    // optionally call /api/logout
+    fetch(`${API_BASE}/api/logout`, { method: 'POST', credentials: 'include' }).catch(() => {});
+    navigate("/");
+  };
 
   // ── Fetch real activity once we have userId ───────────────────────
   useEffect(() => {
@@ -138,7 +153,7 @@ const Dashboard = () => {
               {username.charAt(0).toUpperCase()}
             </div>
             <button
-              onClick={() => navigate("/")}
+              onClick={handleLogout}
               className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white/80 transition-colors"
             >
               <LogOut className="w-4 h-4" />

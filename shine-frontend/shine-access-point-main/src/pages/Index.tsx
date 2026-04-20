@@ -44,6 +44,10 @@ const Index = () => {
           return;
         }
         toast.success("Login successful!");
+        if (data.user && data.user.id) {
+          localStorage.setItem("shine_user_id", data.user.id.toString());
+          localStorage.setItem("shine_username", data.user.username);
+        }
         navigate("/dashboard");
       } else {
         // ── Register ───────────────────────────────────────────────
