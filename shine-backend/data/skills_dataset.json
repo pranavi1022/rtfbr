@@ -71,5 +71,40 @@
       "Flask": {"title": "Flask Web Framework", "link": "https://flask.palletsprojects.com/en/3.0.x/tutorial/", "time": "1-2 weeks"},
       "MySQL": {"title": "MySQL Database", "link": "https://dev.mysql.com/doc/refman/8.0/en/tutorial.html", "time": "1-2 weeks"}
     }
+  },
+  "gaming": {
+    "Frontend": {
+      "skills": ["JavaScript", "HTML", "CSS"],
+      "weights": {"JavaScript": 4, "HTML": 2, "CSS": 2}
+    },
+    "Game Engine": {
+      "skills": ["Pygame", "Three.js"],
+      "weights": {"Pygame": 4, "Three.js": 4}
+    },
+    "Backend": {
+      "skills": ["Python", "Flask"],
+      "weights": {"Python": 3, "Flask": 3}
+    },
+    "Networking": {
+      "skills": ["WebSocket"],
+      "weights": {"WebSocket": 3}
+    },
+    "dependencies": {
+      "Pygame": ["Python"],
+      "Three.js": ["JavaScript"],
+      "Flask": ["Python"],
+      "WebSocket": ["JavaScript"]
+    },
+    "learning_resources": {
+      "Python": {"title": "Python Programming", "link": "https://docs.python.org/3/tutorial/", "time": "2-3 weeks"},
+      "Pygame": {"title": "Pygame Game Development", "link": "https://www.pygame.org/docs/", "time": "2-3 weeks"},
+      "JavaScript": {"title": "JavaScript Essentials", "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide", "time": "2-3 weeks"},
+      "Three.js": {"title": "Three.js 3D Graphics", "link": "https://threejs.org/manual/#en/fundamentals", "time": "3-4 weeks"},
+      "HTML": {"title": "HTML Foundations", "link": "https://developer.mozilla.org/en-US/docs/Learn/HTML", "time": "1 week"},
+      "CSS": {"title": "CSS Fundamentals", "link": "https://web.dev/learn/css", "time": "1 week"},
+      "Flask": {"title": "Flask Web Framework", "link": "https://flask.palletsprojects.com/en/3.0.x/tutorial/", "time": "1-2 weeks"},
+      "WebSocket": {"title": "WebSocket Tutorial", "link": "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API", "time": "1-2 weeks"}
+    }
   }
 }
+

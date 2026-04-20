@@ -1,16 +1,12 @@
 """
 config.py — SHINE backend configuration
 
-Reads all credentials and settings from environment variables (via .env file).
-Falls back to hardcoded defaults so the app still works without a .env file.
+Reads all credentials from environment variables (.env file for local dev,
+Render dashboard for production).
 
 Database strategy:
   - If DATABASE_URL is set (Render / production) → PostgreSQL via psycopg2
   - Otherwise → MySQL via mysql-connector-python (local development)
-
-connect_timeout=5 tells the DB driver to fail fast (5 seconds)
-instead of blocking the entire Flask thread indefinitely when the
-database is slow or unreachable.
 """
 
 import os
@@ -23,10 +19,7 @@ try:
 except ImportError:
     pass
 
-# ── Database ──────────────────────────────────────────────────────────
-# If DATABASE_URL is set → PostgreSQL (Render production)
-# Otherwise            → MySQL      (local development)
-
+# ── Database ──────────────────────────────────────────────────────────────
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 
 if DATABASE_URL:
@@ -51,13 +44,13 @@ else:
         "connect_timeout": 5,
     }
 
-# ── Flask ─────────────────────────────────────────────────────────────
-FLASK_PORT    = int(os.getenv("PORT", "5000"))
-FLASK_SECRET  = os.getenv("FLASK_SECRET_KEY", "shine_secret_key_2024")
+# ── Flask ─────────────────────────────────────────────────────────────────
+FLASK_PORT   = int(os.getenv("PORT", "5000"))
+FLASK_SECRET = os.getenv("FLASK_SECRET_KEY", "shine_secret_key_2024")
 
-# ── Email OTP (Gmail SMTP) ───────────────────────────────────────────
-# To use real email: set EMAIL_USER and EMAIL_PASS in .env
-# Generate an App Password at: https://myaccount.google.com/apppasswords
+# ── Email OTP (Gmail SMTP) ────────────────────────────────────────────────
+# EMAIL_PASS MUST be a Gmail App Password (not your regular Gmail password).
+# Generate at: https://myaccount.google.com/apppasswords
 EMAIL_USER = os.getenv("EMAIL_USER", "")
 EMAIL_PASS = os.getenv("EMAIL_PASS", "")
 SMTP_HOST  = os.getenv("SMTP_HOST", "smtp.gmail.com")

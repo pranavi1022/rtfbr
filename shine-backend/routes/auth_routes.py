@@ -4,7 +4,7 @@ Handles: /api/register  /api/login  /api/logout  /api/me
          /api/forgot-password  /api/verify-otp  /api/reset-password
 
 FEATURE 5 — OTP-based password reset
-  - If EMAIL_USER and EMAIL_PASS are set in .env → sends OTP via Gmail SMTP
+  - If EMAIL_USER and EMAIL_PASS are set → sends OTP via Gmail SMTP (TLS)
   - Otherwise → prints OTP to server console (demo mode)
 """
 
@@ -30,34 +30,33 @@ OTP_TTL_SECONDS = 300   # OTP valid for 5 minutes
 
 def _send_otp_email(to_email: str, otp: str) -> bool:
     """
-    Send the OTP to the user's email via Gmail SMTP.
+    Send the OTP to the user's email via Gmail SMTP with TLS.
     Returns True on success, False on failure.
     Falls back to console print if EMAIL_USER/EMAIL_PASS are not configured.
     """
     if not EMAIL_USER or not EMAIL_PASS:
-        # Demo mode: print to console
         print("\n" + "=" * 50)
         print(f"  [SHINE OTP DEMO]  Email : {to_email}")
         print(f"  [SHINE OTP DEMO]  OTP   : {otp}")
         print(f"  [SHINE OTP DEMO]  Valid for {OTP_TTL_SECONDS // 60} minutes")
-        print("  (Set EMAIL_USER & EMAIL_PASS in .env to send real emails)")
+        print("  (Set EMAIL_USER & EMAIL_PASS in Render env vars)")
         print("=" * 50 + "\n")
         return True
 
     try:
+        print(f"[OTP] Attempting email to {to_email} via {SMTP_HOST}:{SMTP_PORT}")
+
         msg = MIMEMultipart("alternative")
         msg["Subject"] = f"SHINE Password Reset OTP: {otp}"
         msg["From"]    = EMAIL_USER
         msg["To"]      = to_email
 
-        # Plain text version
         text = (
             f"Your SHINE password reset OTP is: {otp}\n\n"
             f"This code is valid for {OTP_TTL_SECONDS // 60} minutes.\n"
             f"If you did not request this, please ignore this email."
         )
 
-        # HTML version
         html = f"""
         <html>
         <body style="font-family: Arial, sans-serif; background: #0a0a0a; color: #ffffff; padding: 40px;">
@@ -84,9 +83,9 @@ def _send_otp_email(to_email: str, otp: str) -> bool:
         msg.attach(MIMEText(text, "plain"))
         msg.attach(MIMEText(html, "html"))
 
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=20) as server:
             server.ehlo()
-            server.starttls()
+            server.starttls()          # Enable TLS encryption
             server.ehlo()
             server.login(EMAIL_USER, EMAIL_PASS)
             server.sendmail(EMAIL_USER, to_email, msg.as_string())
@@ -94,9 +93,18 @@ def _send_otp_email(to_email: str, otp: str) -> bool:
         print(f"[OTP] Email sent successfully to {to_email}")
         return True
 
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"[OTP] SMTP Authentication FAILED: {e}")
+        print(f"[OTP] Make sure EMAIL_PASS is a Gmail APP PASSWORD (not regular password).")
+        print(f"[OTP] Generate at: https://myaccount.google.com/apppasswords")
+        print(f"[OTP] Falling back to console — OTP for {to_email}: {otp}")
+        return False
+    except smtplib.SMTPException as e:
+        print(f"[OTP] SMTP error: {e}")
+        print(f"[OTP] Falling back to console — OTP for {to_email}: {otp}")
+        return False
     except Exception as e:
-        print(f"[OTP] Email send FAILED: {e}")
-        # Fall back to console print so demo still works
+        print(f"[OTP] Email send FAILED (unexpected): {e}")
         print(f"[OTP] Falling back to console — OTP for {to_email}: {otp}")
         return False
 
@@ -132,10 +140,11 @@ def register():
         conn.commit()
         cursor.close()
         conn.close()
+        print(f"[auth] Registered OK: {username!r}")
         return jsonify({"message": "Registration successful"}), 201
     except Exception as e:
         err_lower = str(e).lower()
-        if "duplicate" in err_lower:
+        if "duplicate" in err_lower or "unique" in err_lower:
             if "username" in err_lower:
                 return jsonify({"error": "Username already taken"}), 409
             if "email" in err_lower:
@@ -158,6 +167,7 @@ def login():
     if conn is None:
         return jsonify({"error": "Database unavailable. Please try again later."}), 503
     try:
+        # Use dictionary=True so _PgConnWrapper returns RealDictCursor (dict rows)
         cursor = conn.cursor(dictionary=True)
         cursor.execute(
             "SELECT id, fullname, username, password_hash FROM users WHERE username = %s",
@@ -167,12 +177,20 @@ def login():
         cursor.close()
         conn.close()
 
-        if not user or not check_password_hash(user["password_hash"], password):
+        if not user:
+            print(f"[auth] Login FAILED: user not found — {username!r}")
+            return jsonify({"error": "Invalid username or password"}), 401
+
+        # Convert to plain dict if it's a psycopg2 RealDictRow
+        user = dict(user)
+
+        if not check_password_hash(user["password_hash"], password):
+            print(f"[auth] Login FAILED: wrong password — {username!r}")
             return jsonify({"error": "Invalid username or password"}), 401
 
         session['user_id']  = user['id']
         session['username'] = user['username']
-        print(f"[auth] Login OK for {username!r}")
+        print(f"[auth] Login OK for {username!r} (id={user['id']})")
 
         return jsonify({
             "message": "Login successful",
@@ -189,6 +207,7 @@ def login():
 
 @auth_bp.route('/api/logout', methods=['POST'])
 def logout():
+    print(f"[auth] Logout for user_id={session.get('user_id')}")
     session.clear()
     return jsonify({"message": "Logged out successfully"}), 200
 
@@ -208,9 +227,8 @@ def me():
 @auth_bp.route('/api/forgot-password', methods=['POST'])
 def forgot_password():
     """
-    Step 1: User submits their email.
-    System checks if email exists, generates a 6-digit OTP,
-    and sends it via email (or prints to console in demo mode).
+    Step 1: User submits email.
+    System checks if email exists, generates OTP, sends via email.
     """
     data  = request.get_json() or {}
     email = data.get('email', '').strip().lower()
@@ -218,11 +236,9 @@ def forgot_password():
     if not email:
         return jsonify({"error": "Email is required"}), 400
 
-    # Check if email exists in the users table
     print(f"[API] POST /api/forgot-password  email={email!r}")
     conn = get_db_connection()
     if conn is None:
-        # DB down — still generate OTP so demo can proceed without MySQL
         print(f"[OTP] DB unavailable — generating OTP without email validation (demo mode)")
         user = True   # skip DB check in demo
     else:
@@ -237,8 +253,6 @@ def forgot_password():
             return jsonify({"error": "Database error. Please try again."}), 500
 
     if not user:
-        # Security: don't reveal whether the email exists
-        # But for demo/viva purposes we tell the user
         return jsonify({"error": "No account found with that email address."}), 404
 
     # Generate 6-digit OTP
@@ -247,8 +261,8 @@ def forgot_password():
         "otp":     otp,
         "expires": time.time() + OTP_TTL_SECONDS
     }
+    print(f"[OTP] Generated OTP for {email!r}")
 
-    # Send OTP via email (or console fallback)
     email_sent = _send_otp_email(email, otp)
 
     if EMAIL_USER and EMAIL_PASS and email_sent:
@@ -263,9 +277,7 @@ def forgot_password():
 
 @auth_bp.route('/api/verify-otp', methods=['POST'])
 def verify_otp():
-    """
-    Step 2: User submits the OTP they received.
-    """
+    """Step 2: Verify the OTP."""
     data  = request.get_json() or {}
     email = data.get('email', '').strip().lower()
     otp   = data.get('otp',   '').strip()
@@ -285,17 +297,14 @@ def verify_otp():
     if record["otp"] != otp:
         return jsonify({"error": "Incorrect OTP. Please try again."}), 400
 
-    # OTP is correct — mark it as verified (keep in store for reset step)
     record["verified"] = True
+    print(f"[OTP] Verified for {email!r}")
     return jsonify({"message": "OTP verified successfully."}), 200
 
 
 @auth_bp.route('/api/reset-password', methods=['POST'])
 def reset_password():
-    """
-    Step 3: User submits their new password.
-    OTP must have been verified in the previous step.
-    """
+    """Step 3: Reset the password after OTP is verified."""
     data         = request.get_json() or {}
     email        = data.get('email',        '').strip().lower()
     new_password = data.get('new_password', '').strip()
@@ -315,7 +324,6 @@ def reset_password():
         _otp_store.pop(email, None)
         return jsonify({"error": "Session expired. Please start over."}), 400
 
-    # Update password in DB
     hashed = generate_password_hash(new_password)
     print(f"[API] POST /api/reset-password  email={email!r}")
     conn = get_db_connection()
@@ -334,8 +342,6 @@ def reset_password():
         print(f"[auth] reset-password DB error: {e}")
         return jsonify({"error": "Failed to reset password. Please try again."}), 500
 
-    # Clear OTP record
     _otp_store.pop(email, None)
-    print(f"[auth] Password reset successful for {email}")
-
+    print(f"[auth] Password reset successful for {email!r}")
     return jsonify({"message": "Password reset successful. You can now log in."}), 200

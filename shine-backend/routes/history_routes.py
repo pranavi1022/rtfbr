@@ -4,9 +4,17 @@ routes/history_routes.py
 Endpoints:
   POST /api/save-activity        — save a user activity (project search / skill gap)
   GET  /api/user-history/<user_id> — fetch recent activity for a user
+  GET  /api/my-history           — fetch history for logged-in user (session)
 
-Activity is stored in MySQL if available; falls back to in-memory store
+Activity is stored in PostgreSQL if available; falls back to in-memory store
 so the Dashboard still works even when the database is offline.
+
+Fixed:
+  - dict() conversion on psycopg2 RealDictRow
+  - commit() ensured after INSERT
+  - _ensure_table only called once at startup (not per request)
+  - Correct user_id handling from session and request body
+  - Timestamp serialized to string safely
 """
 
 from flask import Blueprint, request, jsonify, session
@@ -17,26 +25,34 @@ import time
 history_bp = Blueprint('history', __name__)
 
 # ── In-memory fallback store ─────────────────────────────────────────────
-# { user_id: [ { project, level, missing_skills, action, timestamp } ] }
+# { user_id (int): [ { project, level, missing_skills, action, timestamp } ] }
 _memory_history: dict = {}
+MAX_HISTORY_PER_USER = 20
 
-MAX_HISTORY_PER_USER = 20   # keep last 20 activities
+# Track whether the DB table has been confirmed to exist this session
+_table_ensured = False
 
 
-def _ensure_table(conn):
-    """Create user_activity table if it doesn't exist."""
+def _ensure_table():
+    """Create user_activity table if it doesn't exist (runs once at startup)."""
+    global _table_ensured
+    if _table_ensured:
+        return
+    conn = get_db_connection()
+    if conn is None:
+        return
     try:
         cursor = conn.cursor()
         if DB_TYPE == "postgresql":
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS user_activity (
-                    id SERIAL PRIMARY KEY,
-                    user_id INT NOT NULL,
-                    project_name VARCHAR(255) NOT NULL,
-                    level VARCHAR(50) DEFAULT '',
-                    missing_skills INT DEFAULT 0,
-                    action VARCHAR(50) DEFAULT 'search',
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    id             SERIAL PRIMARY KEY,
+                    user_id        INT          NOT NULL,
+                    project_name   VARCHAR(255) NOT NULL,
+                    level          VARCHAR(50)  DEFAULT '',
+                    missing_skills INT          DEFAULT 0,
+                    action         VARCHAR(50)  DEFAULT 'search',
+                    created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
             cursor.execute("""
@@ -46,20 +62,27 @@ def _ensure_table(conn):
         else:
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS user_activity (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    user_id INT NOT NULL,
-                    project_name VARCHAR(255) NOT NULL,
-                    level VARCHAR(50) DEFAULT '',
-                    missing_skills INT DEFAULT 0,
-                    action VARCHAR(50) DEFAULT 'search',
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    INDEX idx_user_id (user_id)
+                    id             INT AUTO_INCREMENT PRIMARY KEY,
+                    user_id        INT          NOT NULL,
+                    project_name   VARCHAR(255) NOT NULL,
+                    level          VARCHAR(50)  DEFAULT '',
+                    missing_skills INT          DEFAULT 0,
+                    action         VARCHAR(50)  DEFAULT 'search',
+                    created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    INDEX          idx_user_id (user_id)
                 )
             """)
         conn.commit()
         cursor.close()
+        conn.close()
+        _table_ensured = True
+        print("[history] user_activity table confirmed/created")
     except Exception as e:
         print(f"[history] Table creation error: {e}")
+
+
+# Call at module load time so it's ready before first request
+_ensure_table()
 
 
 # ── Save Activity ────────────────────────────────────────────────────────
@@ -68,18 +91,19 @@ def _ensure_table(conn):
 def save_activity():
     """
     Save a user activity.
-    Body: { project, level, missing_skills, action }
-    user_id is read from session.
+    Body: { project, level, missing_skills, action, user_id (optional) }
+    user_id is read from session first, then request body as fallback.
     """
     data = request.get_json() or {}
 
+    # Get user_id from session (primary) or body (fallback)
     user_id = session.get('user_id')
     if not user_id:
-        # Try from body as fallback
         user_id = data.get('user_id')
     if not user_id:
         return jsonify({"error": "Not logged in"}), 401
 
+    user_id        = int(user_id)
     project        = data.get('project', '').strip()
     level          = data.get('level', '').strip()
     missing_skills = data.get('missing_skills', 0)
@@ -88,27 +112,28 @@ def save_activity():
     if not project:
         return jsonify({"error": "project is required"}), 400
 
-    # Try MySQL first
+    print(f"[history] Saving activity: user_id={user_id} project={project!r} action={action!r}")
+
+    # Try Database first
     saved_to_db = False
     conn = get_db_connection()
     if conn is not None:
         try:
-            _ensure_table(conn)
             cursor = conn.cursor()
             cursor.execute(
                 """INSERT INTO user_activity (user_id, project_name, level, missing_skills, action)
                    VALUES (%s, %s, %s, %s, %s)""",
-                (user_id, project, level, missing_skills, action)
+                (user_id, project, level, int(missing_skills), action)
             )
             conn.commit()
             cursor.close()
             conn.close()
             saved_to_db = True
-            print(f"[history] Activity saved to MySQL for user {user_id}: {project!r}")
+            print(f"[history] Activity saved to DB for user_id={user_id}: {project!r}")
         except Exception as e:
-            print(f"[history] MySQL save error: {e}")
+            print(f"[history] DB save error: {e}")
 
-    # Always save to memory too (for instant fetching without DB)
+    # Always save to in-memory too (for instant fetching without DB)
     if user_id not in _memory_history:
         _memory_history[user_id] = []
 
@@ -117,7 +142,7 @@ def save_activity():
         "level":          level,
         "missing_skills": missing_skills,
         "action":         action,
-        "timestamp":      int(time.time())
+        "timestamp":      str(int(time.time()))
     })
 
     # Trim to last N
@@ -125,7 +150,7 @@ def save_activity():
 
     return jsonify({
         "message": "Activity saved",
-        "source":  "mysql" if saved_to_db else "memory"
+        "source":  "db" if saved_to_db else "memory"
     }), 201
 
 
@@ -133,18 +158,13 @@ def save_activity():
 
 @history_bp.route('/api/user-history/<int:user_id>', methods=['GET'])
 def get_user_history(user_id: int):
-    """
-    Return the last 10 activities for a user.
-    Tries MySQL first, falls back to in-memory store.
-    """
+    """Return the last 10 activities for a user. DB first, memory fallback."""
     activities = []
-    source = "memory"
+    source     = "memory"
 
-    # Try MySQL
     conn = get_db_connection()
     if conn is not None:
         try:
-            _ensure_table(conn)
             cursor = conn.cursor(dictionary=True)
             cursor.execute(
                 """SELECT project_name AS project, level, missing_skills, action,
@@ -162,23 +182,24 @@ def get_user_history(user_id: int):
             if rows:
                 activities = []
                 for r in rows:
+                    r = dict(r)
                     activities.append({
                         "project":        r["project"],
-                        "level":          r["level"],
-                        "missing_skills": r["missing_skills"],
-                        "action":         r["action"],
+                        "level":          r["level"] or "",
+                        "missing_skills": r["missing_skills"] or 0,
+                        "action":         r["action"] or "search",
                         "timestamp":      str(r["timestamp"]) if r["timestamp"] else ""
                     })
-                source = "mysql"
-                print(f"[history] Fetched {len(activities)} rows from MySQL for user {user_id}")
+                source = "db"
+                print(f"[history] Fetched {len(activities)} rows from DB for user_id={user_id}")
         except Exception as e:
-            print(f"[history] MySQL fetch error: {e}")
+            print(f"[history] DB fetch error: {e}")
 
     # Fallback to memory
     if not activities and user_id in _memory_history:
         activities = _memory_history[user_id][:10]
         source = "memory"
-        print(f"[history] Fetched {len(activities)} rows from memory for user {user_id}")
+        print(f"[history] Fetched {len(activities)} rows from memory for user_id={user_id}")
 
     return jsonify({
         "activities": activities,
@@ -194,7 +215,4 @@ def get_my_history():
     user_id = session.get('user_id')
     if not user_id:
         return jsonify({"activities": [], "source": "none"}), 200
-
-    # Delegate to the same logic
-    from flask import redirect
-    return get_user_history(user_id)
+    return get_user_history(int(user_id))

@@ -992,42 +992,96 @@
       },
       {
         "title": "Chat with Username",
-        "description": "Assign a username before entering the chat room. Messages show sender name and timestamp. History stored in MySQL.",
-        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL"]
+        "description": "Assign a username before entering the chat room. Messages show sender name and timestamp. History stored in DB.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "PostgreSQL"]
       }
     ],
     "Intermediate": [
       {
         "title": "Private Messaging App",
         "description": "User login, find other users, send private messages, and see online/offline status with read receipts.",
-        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL", "Flask-SocketIO"]
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "PostgreSQL", "Flask-SocketIO"]
       },
       {
         "title": "Group Chat with Rooms",
-        "description": "Create or join named chat rooms. Messages persist in MySQL. Admin can mute/kick users from rooms.",
-        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL", "Flask-SocketIO"]
+        "description": "Create or join named chat rooms. Messages persist in DB. Admin can mute/kick users from rooms.",
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "PostgreSQL", "Flask-SocketIO"]
       },
       {
         "title": "Chat App with File Sharing",
         "description": "Send text and upload images/files in chat. Preview images inline; file links stored in DB.",
-        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "MySQL", "Flask-SocketIO"]
+        "technologies": ["HTML", "CSS", "JavaScript", "Python", "Flask", "PostgreSQL", "Flask-SocketIO"]
       }
     ],
     "Advanced": [
       {
         "title": "Encrypted Messaging Platform",
         "description": "End-to-end encrypted chat using RSA/AES. Key exchange on login; messages decrypted only on recipient device.",
-        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "Cryptography", "WebSocket"]
+        "technologies": ["Python", "Flask", "PostgreSQL", "JavaScript", "React", "Cryptography", "WebSocket"]
       },
       {
         "title": "Video Conference App",
         "description": "Multi-user video and audio calls using WebRTC with a text chat sidebar. Room links shareable by URL.",
-        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "WebRTC"]
+        "technologies": ["Python", "Flask", "PostgreSQL", "JavaScript", "React", "WebRTC"]
       },
       {
         "title": "AI Chatbot Integration Platform",
         "description": "Messenger platform with plugin-based chatbot support. Bots answer FAQ, schedule meetings, and escalate to human agents.",
-        "technologies": ["Python", "Flask", "MySQL", "JavaScript", "React", "NLP", "WebSocket"]
+        "technologies": ["Python", "Flask", "PostgreSQL", "JavaScript", "React", "NLP", "WebSocket"]
+      }
+    ]
+  },
+
+  "game_project": {
+    "Beginner": [
+      {
+        "title": "Snake Game",
+        "description": "Classic snake game built with Pygame. Arrow keys to move, eat food to grow, and avoid walls.",
+        "technologies": ["Python", "Pygame"]
+      },
+      {
+        "title": "Tic-Tac-Toe Game",
+        "description": "Two-player Tic-Tac-Toe with a clean GUI. Option to play against a simple AI opponent.",
+        "technologies": ["Python", "Pygame", "HTML", "CSS", "JavaScript"]
+      },
+      {
+        "title": "Memory Card Game",
+        "description": "Flip cards to find matching pairs. Timer and move counter track performance. Built with JavaScript.",
+        "technologies": ["HTML", "CSS", "JavaScript"]
+      }
+    ],
+    "Intermediate": [
+      {
+        "title": "Platformer Game",
+        "description": "2D side-scrolling platformer with jumping, enemies, and collectible coins. Level progression system.",
+        "technologies": ["Python", "Pygame", "JavaScript"]
+      },
+      {
+        "title": "Multiplayer Quiz Game",
+        "description": "Real-time multiplayer quiz where players compete. WebSocket-based live scoring and leaderboard.",
+        "technologies": ["Python", "Flask", "Flask-SocketIO", "JavaScript", "React", "PostgreSQL"]
+      },
+      {
+        "title": "Tower Defense Game",
+        "description": "Strategic tower defense game with multiple tower types, enemy waves, and upgrade system.",
+        "technologies": ["Python", "Pygame", "JavaScript", "HTML", "CSS"]
+      }
+    ],
+    "Advanced": [
+      {
+        "title": "3D First-Person Explorer",
+        "description": "First-person 3D environment built with Three.js. Explore a procedurally generated world with dynamic lighting.",
+        "technologies": ["JavaScript", "Three.js", "React", "WebGL"]
+      },
+      {
+        "title": "Multiplayer Battle Arena",
+        "description": "Real-time multiplayer battle game with WebSocket networking. Player matchmaking and live score tracking.",
+        "technologies": ["Python", "Flask", "Flask-SocketIO", "JavaScript", "React", "PostgreSQL", "Redis"]
+      },
+      {
+        "title": "AI Game Bot with Reinforcement Learning",
+        "description": "Train an AI agent to play a game using reinforcement learning. Compare human vs AI performance on dashboard.",
+        "technologies": ["Python", "TensorFlow", "Flask", "Pygame", "JavaScript", "React"]
       }
     ]
   }
