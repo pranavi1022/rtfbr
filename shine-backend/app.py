@@ -17,7 +17,7 @@ print(f"[BOOT] DATABASE_URL set: {bool(os.environ.get('DATABASE_URL'))}")
 print(f"[BOOT] PORT: {os.environ.get('PORT', 'not set')}")
 
 # ── Step 1: Flask ────────────────────────────────────────────────────
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -134,6 +134,22 @@ def seed_status():
         return jsonify({"status": "ok", "table_counts": counts}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+
+# ── Trigger seed route ────────────────────────────────────────────────
+@app.route('/api/trigger-seed')
+def trigger_seed():
+    """
+    Runs the full DB seed SYNCHRONOUSLY and returns every log line as JSON.
+    Visit in browser: https://shine-backend-08ll.onrender.com/api/trigger-seed
+    Add ?force=true to re-insert even if tables already have data.
+    """
+    try:
+        from database.seed_db import run_seed
+        force = request.args.get('force', '').lower() == 'true'
+        result = run_seed(force=force)
+        return jsonify(result), 200 if result.get("success") else 500
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 # ── Print all registered routes ──────────────────────────────────────
 print("[BOOT] Registered routes:")
