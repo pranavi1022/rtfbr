@@ -2,10 +2,12 @@
  * src/lib/api.ts
  *
  * Centralized API configuration.
- * Points to the deployed backend on Render.
+ * Reads VITE_API_BASE from .env (set in Render dashboard for production).
+ * Falls back to the production URL if the variable is not set.
  */
 
-export const API_BASE = "https://shine-backend-08ll.onrender.com";
+export const API_BASE =
+  import.meta.env.VITE_API_BASE || "https://shine-backend-08ll.onrender.com";
 
 /**
  * Shorthand for fetch with JSON + credentials.
