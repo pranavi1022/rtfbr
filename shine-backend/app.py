@@ -53,7 +53,14 @@ CORS(app, resources={
 })
 print("[BOOT] CORS configured")
 
-# ── Step 4: Register blueprints ──────────────────────────────────────
+# ── Step 4: Auto-seed database (runs in background thread) ─────────────
+try:
+    from database.seed_db import seed_in_background
+    seed_in_background()
+except Exception as e:
+    print(f"[BOOT] WARNING: seed_in_background failed to start: {e}")
+
+# ── Step 5: Register blueprints ──────────────────────────────────────
 try:
     from routes.auth_routes import auth_bp
     app.register_blueprint(auth_bp)
@@ -102,6 +109,29 @@ def api_test():
             return jsonify({"status": "ok", "database": "connected", "db_type": DB_TYPE})
         else:
             return jsonify({"status": "error", "database": "not connected", "db_type": DB_TYPE}), 500
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+# ── Seed status route ─────────────────────────────────────────────────
+@app.route('/api/seed-status')
+def seed_status():
+    """Check table row counts so you can verify seeding worked."""
+    try:
+        from logic.keyword_matcher import get_db_connection
+        conn = get_db_connection()
+        if conn is None:
+            return jsonify({"status": "db_unavailable"}), 503
+        cursor = conn.cursor()
+        counts = {}
+        for tbl in ('projects', 'keywords', 'skills', 'skill_dependencies', 'learning_resources', 'users'):
+            try:
+                cursor.execute(f"SELECT COUNT(*) FROM {tbl}")
+                counts[tbl] = cursor.fetchone()[0]
+            except Exception:
+                counts[tbl] = -1
+        cursor.close()
+        conn.close()
+        return jsonify({"status": "ok", "table_counts": counts}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
