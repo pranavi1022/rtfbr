@@ -64,5 +64,5 @@ if __name__ == '__main__':
     print("  Make sure MySQL is running and schema.sql was executed.")
     print("=" * 55)
     if __name__ == '__main__':
-    port = int(os.environ.get("PORT", FLASK_PORT))
-    app.run(host="0.0.0.0", port=port)
+        port = int(os.environ.get("PORT", FLASK_PORT))
+        app.run(host="0.0.0.0", port=port)
