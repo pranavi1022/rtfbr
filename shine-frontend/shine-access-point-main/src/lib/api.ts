@@ -5,7 +5,7 @@
  * Points to the deployed backend on Render.
  */
 
-export const API_BASE = "https://rtfbr.onrender.com";
+export const API_BASE = "https://shine-backend-0811.onrender.com";
 
 /**
  * Shorthand for fetch with JSON + credentials.
