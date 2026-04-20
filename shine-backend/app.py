@@ -35,16 +35,22 @@ except Exception as e:
     app.secret_key = "fallback_secret"
 
 # ── Step 3: CORS ─────────────────────────────────────────────────────
-CORS(app, resources={r"/*": {
-    "origins": [
-        "https://rtfbr-1.onrender.com",
-        "http://localhost:5173",
-        "http://localhost:3000",
-    ],
-    "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    "allow_headers": ["Content-Type", "Authorization"],
-    "supports_credentials": True
-}})
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "https://rtfbr-1.onrender.com",                    # Frontend on Render
+            "https://shine-backend-08ll.onrender.com",         # Backend (for testing)
+            "http://localhost:5173",                           # Local Vite dev
+            "http://localhost:3000",                           # Fallback local
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
+    },
+    r"/*": {
+        "origins": "*"  # Allow root routes without CORS restrictions
+    }
+})
 print("[BOOT] CORS configured")
 
 # ── Step 4: Register blueprints ──────────────────────────────────────
