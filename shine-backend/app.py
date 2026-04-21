@@ -19,8 +19,19 @@ print(f"[BOOT] PORT: {os.environ.get('PORT', 'not set')}")
 # ── Step 1: Flask ────────────────────────────────────────────────────
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+
+app.config['MAIL_SERVER']         = 'smtp.gmail.com'
+app.config['MAIL_PORT']           = 587
+app.config['MAIL_USE_TLS']        = True
+app.config['MAIL_USERNAME']       = os.environ.get('EMAIL_USER')
+app.config['MAIL_PASSWORD']       = os.environ.get('EMAIL_PASS')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('EMAIL_USER')
+
+mail = Mail(app)
+print("[BOOT] Mail configured")
 print("[BOOT] Flask app created")
 
 # ── Step 2: Config ───────────────────────────────────────────────────
@@ -153,7 +164,20 @@ def trigger_seed():
         return jsonify(result), 200 if result.get("success") else 500
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+@app.route('/api/debug/email-test')
+def email_test():
+    try:
+        msg = Message(
+            subject="Test Email from SHINE",
+            recipients=[os.environ.get('EMAIL_USER')],
+            body="Email system is working correctly!"
+        )
 
+        mail.send(msg)
+
+        return jsonify({"status": "email sent successfully"})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
 # ── Print all registered routes ──────────────────────────────────────
 print("[BOOT] Registered routes:")
 for rule in app.url_map.iter_rules():
