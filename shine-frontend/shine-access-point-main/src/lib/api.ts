@@ -2,12 +2,19 @@
  * src/lib/api.ts
  *
  * Centralized API configuration.
- * Reads VITE_API_BASE from .env (set in Render dashboard for production).
- * Falls back to the production URL if the variable is not set.
+ * 
+ * IMPORTANT: The correct production backend is shine-backend-08ll.onrender.com.
+ * The old rtfbr.onrender.com backend does NOT have PostgreSQL configured.
+ * We hardcode the correct URL here because Render's VITE_API_BASE env var
+ * may still point to the old URL.
+ * 
+ * For local development, set VITE_API_BASE=http://localhost:5000 in .env
  */
 
 export const API_BASE =
-  import.meta.env.VITE_API_BASE || "https://shine-backend-08ll.onrender.com";
+  import.meta.env.VITE_API_BASE?.includes("localhost")
+    ? import.meta.env.VITE_API_BASE
+    : "https://shine-backend-08ll.onrender.com";
 
 /**
  * Shorthand for fetch with JSON + credentials.
