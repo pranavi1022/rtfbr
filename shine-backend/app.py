@@ -27,6 +27,9 @@ print("[BOOT] Flask app created")
 try:
     from config import FLASK_PORT, FLASK_SECRET, DB_TYPE, DB_CONFIG
     app.secret_key = FLASK_SECRET
+    # Cross-origin cookie settings (frontend and backend on different Render subdomains)
+    app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+    app.config['SESSION_COOKIE_SECURE'] = True
     print(f"[BOOT] Config loaded: DB_TYPE={DB_TYPE}")
     print(f"[BOOT] DB host={DB_CONFIG.get('host')}, dbname={DB_CONFIG.get('dbname', DB_CONFIG.get('database'))}")
 except Exception as e:
